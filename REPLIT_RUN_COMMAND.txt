@@ -1,5 +1,6 @@
-Set this in Replit: Deploy → your deployment → General configuration → Run command
+Replit Deploy → your deployment → Adjust settings → General configuration:
 
-cd server && bash run.sh
+  Build command:  LEAVE EMPTY (optional field)
+  Run command:    cd server && bash run.sh
 
-(Replace any existing Run command like "npm run start:server" with the line above, then save and Republish.)
+If Build command is set to "cd server && bash run.sh", clear it. Build runs in a different environment and will fail; only Run command should start the server. Then save and Republish.

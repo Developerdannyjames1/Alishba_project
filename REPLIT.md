@@ -48,11 +48,13 @@ The file **REPLIT_RUN_COMMAND.txt** in this repo contains the same command for c
 ## 4. Deploy (always-on URL)
 
 1. In the top bar, click **Deploy** (or **Deployment**).
-2. **Important:** Set the **Run** / **Start** command for the deployment to:
+2. **Important:** In General configuration:
+   - **Build command:** Leave **empty** (do not set it to `cd server && bash run.sh` — Build runs in a different environment and will fail).
+   - **Run command:** Set to exactly:
    ```bash
    cd server && bash run.sh
    ```
-   This uses `server/run.sh` (install + start) and does not depend on npm script names. If Replit runs from `server/` already, use just: `bash run.sh`.
+   If "Your app failed to build" appears, clear the Build command and keep only the Run command above.
 3. Ensure **Secrets** (Lock icon) are set: `MONGO_URI`, `JWT_SECRET`, `CLIENT_URL`. They apply to Deploy as well.
 4. Create/update the deployment so the app gets a stable public URL.
 5. Copy that URL (e.g. `https://alishbaproject--developerdigita.replit.app`).
