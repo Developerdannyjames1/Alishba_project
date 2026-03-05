@@ -1,0 +1,5 @@
+Set this in Replit: Deploy → your deployment → General configuration → Run command
+
+cd server && bash run.sh
+
+(Replace any existing Run command like "npm run start:server" with the line above, then save and Republish.)

@@ -2,7 +2,23 @@
 
 Use this when you import **Developerdannyjames1/Alishba_project** into Replit so the backend runs from the `server/` folder.
 
-## 1. Import the repo
+---
+
+## ⚠️ If deploy fails with "Missing script: start:server"
+
+**Replit is still using the old Run command.** You must change it in the Replit UI:
+
+1. Open **Deploy** (or **Publishing**) → your deployment.
+2. Click **Adjust settings** (or **Manage** → **General configuration**).
+3. Find **Run command**. It currently says `npm run start:server` — **delete that** and set it to exactly:
+   ```bash
+   cd server && bash run.sh
+   ```
+4. Save, then click **Republish**.
+
+The file **REPLIT_RUN_COMMAND.txt** in this repo contains the same command for copy-paste.
+
+---
 
 1. Go to [replit.com](https://replit.com) and sign in (e.g. with GitHub).
 2. Click **Create Repl**.
