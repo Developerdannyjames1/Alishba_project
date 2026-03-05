@@ -34,9 +34,9 @@ Use this when you import **Developerdannyjames1/Alishba_project** into Replit so
 1. In the top bar, click **Deploy** (or **Deployment**).
 2. **Important:** Set the **Run** / **Start** command for the deployment to:
    ```bash
-   npm run start:server
+   cd server && bash run.sh
    ```
-   (This runs the backend from `server/`, not the frontend.) If you don’t set this, Replit may run `npm start` from the repo root (Vite) and the deploy will fail.
+   This uses `server/run.sh` (install + start) and does not depend on npm script names. If Replit runs from `server/` already, use just: `bash run.sh`.
 3. Ensure **Secrets** (Lock icon) are set: `MONGO_URI`, `JWT_SECRET`, `CLIENT_URL`. They apply to Deploy as well.
 4. Create/update the deployment so the app gets a stable public URL.
 5. Copy that URL (e.g. `https://alishbaproject--developerdigita.replit.app`).
@@ -44,11 +44,10 @@ Use this when you import **Developerdannyjames1/Alishba_project** into Replit so
 ## 5. If deploy failed (“failed to publish” or “crash loop”)
 
 - Open **Deploy** → your deployment → **Logs** to see the error.
-- **Run command:** Replit Deploy often runs from the **server/** directory. If you see `Missing script: "start:server"`, set the **Run command** to:
-  ```bash
-  npm install && npm start
-  ```
-  (Not `npm run start:server` — that’s for when the run context is the repo root.)
+- **Run command:** Use one of these (no dependency on npm script names):
+  - From repo root: `cd server && bash run.sh`
+  - If Replit’s run context is already `server/`: `bash run.sh`
+  - Or: `npm install && npm start` (only if run context is `server/`).
 - Confirm **Secrets** are set (Lock icon): `MONGO_URI`, `JWT_SECRET`, `CLIENT_URL`.
 - **Redeploy** after changing the run command or secrets.
 
