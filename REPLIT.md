@@ -32,10 +32,23 @@ Use this when you import **Developerdannyjames1/Alishba_project** into Replit so
 ## 4. Deploy (always-on URL)
 
 1. In the top bar, click **Deploy** (or **Deployment**).
-2. Create a deployment so the app gets a stable public URL that stays up (within Replit’s free limits).
-3. Copy that URL (e.g. `https://alishba-api.username.repl.co`).
+2. **Important:** Set the **Run** / **Start** command for the deployment to:
+   ```bash
+   npm run start:server
+   ```
+   (This runs the backend from `server/`, not the frontend.) If you don’t set this, Replit may run `npm start` from the repo root (Vite) and the deploy will fail.
+3. Ensure **Secrets** (Lock icon) are set: `MONGO_URI`, `JWT_SECRET`, `CLIENT_URL`. They apply to Deploy as well.
+4. Create/update the deployment so the app gets a stable public URL.
+5. Copy that URL (e.g. `https://alishbaproject--developerdigita.replit.app`).
 
-## 5. Point Vercel at the backend
+## 5. If deploy failed (“failed to publish”)
+
+- Open **Deploy** → your deployment → **Logs** to see the error.
+- Set the deployment **Start command** to: `npm run start:server` (see step 4 above).
+- Confirm **Secrets** are set (Lock icon): `MONGO_URI`, `JWT_SECRET`, `CLIENT_URL`.
+- **Redeploy** after changing the start command or secrets.
+
+## 6. Point Vercel at the backend
 
 In your **Vercel** project → **Settings** → **Environment Variables**:
 
