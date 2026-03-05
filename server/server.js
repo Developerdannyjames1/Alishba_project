@@ -7,6 +7,17 @@ const connectDB = require("./config/db");
 const { setupSocket } = require("./socket/socket");
 
 dotenv.config();
+
+// Fail fast with a clear message if required env vars are missing (e.g. on Replit Deploy)
+if (!process.env.MONGO_URI) {
+  console.error("Missing required env: MONGO_URI. Set it in Replit Secrets (Lock icon) and enable secrets for Deploy.");
+  process.exit(1);
+}
+if (!process.env.JWT_SECRET) {
+  console.error("Missing required env: JWT_SECRET. Set it in Replit Secrets (Lock icon) and enable secrets for Deploy.");
+  process.exit(1);
+}
+
 connectDB();
 
 const app = express();
