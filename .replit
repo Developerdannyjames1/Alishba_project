@@ -1,5 +1,5 @@
 # Replit: run the backend from server/
 # Set Secrets (lock icon): MONGO_URI, JWT_SECRET, CLIENT_URL
 
-run = "npm run start:server"
+run = "cd server && bash run.sh"
 entrypoint = "server/server.js"
