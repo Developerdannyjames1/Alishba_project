@@ -41,12 +41,16 @@ Use this when you import **Developerdannyjames1/Alishba_project** into Replit so
 4. Create/update the deployment so the app gets a stable public URL.
 5. Copy that URL (e.g. `https://alishbaproject--developerdigita.replit.app`).
 
-## 5. If deploy failed (“failed to publish”)
+## 5. If deploy failed (“failed to publish” or “crash loop”)
 
 - Open **Deploy** → your deployment → **Logs** to see the error.
-- Set the deployment **Start command** to: `npm run start:server` (see step 4 above).
+- **Run command:** Replit Deploy often runs from the **server/** directory. If you see `Missing script: "start:server"`, set the **Run command** to:
+  ```bash
+  npm install && npm start
+  ```
+  (Not `npm run start:server` — that’s for when the run context is the repo root.)
 - Confirm **Secrets** are set (Lock icon): `MONGO_URI`, `JWT_SECRET`, `CLIENT_URL`.
-- **Redeploy** after changing the start command or secrets.
+- **Redeploy** after changing the run command or secrets.
 
 ## 6. Point Vercel at the backend
 

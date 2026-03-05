@@ -54,7 +54,10 @@ app.use("/api/applications", require("./routes/expoApplicationRoutes"));
 app.use("/api/bookmarks", require("./routes/bookmarkRoutes"));
 app.use("/api/messages", require("./routes/messageRoutes"));
 
-// Health check
+// Health check (root for Replit / platform health checks)
+app.get("/", (req, res) => {
+  res.status(200).json({ status: "ok", message: "Event Sphere Management API is running" });
+});
 app.get("/api/health", (req, res) => {
   res.json({ status: "ok", message: "Event Sphere Management API is running" });
 });
