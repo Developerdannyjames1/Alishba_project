@@ -63,7 +63,7 @@ The file **REPLIT_RUN_COMMAND.txt** in this repo contains the same command for c
 
 - Open **Deploy** → your deployment → **Logs** to see the error.
 - **Run command:** Use one of these (no dependency on npm script names):
-  - From repo root: `cd server && bash run.sh`
+  - If you see "node: not found", use **`npm run start:server`** so Replit uses a Node runtime. Otherwise: `cd server && bash run.sh`
   - If Replit’s run context is already `server/`: `bash run.sh`
   - Or: `npm install && npm start` (only if run context is `server/`).
 - Confirm **Secrets** are set (Lock icon): `MONGO_URI`, `JWT_SECRET`, `CLIENT_URL`.

@@ -5,13 +5,19 @@ cd "$(dirname "$0")"
 if [ -f /home/runner/.nix-profile/etc/profile.d/nix.sh ]; then
   . /home/runner/.nix-profile/etc/profile.d/nix.sh
 fi
-export PATH="/home/runner/.nix-profile/bin:/usr/local/bin:$PATH"
+export PATH="/home/runner/.nix-profile/bin:/usr/local/bin:/usr/bin:$PATH"
 if command -v npm >/dev/null 2>&1; then
   npm install
 fi
-# Ensure node is available (same path as npm when from nix)
-NODE=$(command -v node 2>/dev/null || echo "")
-if [ -z "$NODE" ] && [ -x /home/runner/.nix-profile/bin/node ]; then
-  export PATH="/home/runner/.nix-profile/bin:$PATH"
+# Use node from PATH or find it in common locations (Replit Promote often has no PATH)
+NODE=$(command -v node 2>/dev/null || true)
+if [ -z "$NODE" ]; then
+  for p in /home/runner/.nix-profile/bin/node /usr/local/bin/node /usr/bin/node; do
+    if [ -x "$p" ]; then NODE=$p; break; fi
+  done
 fi
-exec node server.js
+if [ -z "$NODE" ]; then
+  echo "error: node not found. In Replit Deploy → Adjust settings, ensure Runtime/Environment is Node.js."
+  exit 1
+fi
+exec "$NODE" server.js
