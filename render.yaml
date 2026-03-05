@@ -1,0 +1,22 @@
+# Render Blueprint - Event Sphere Management API (backend only)
+# Deploy: Connect this repo at render.com and add env vars in the dashboard.
+# Frontend stays on Vercel; set VITE_API_URL and VITE_SOCKET_URL to this service URL.
+
+services:
+  - type: web
+    runtime: node
+    name: alishba-api
+    rootDir: server
+
+    buildCommand: npm install
+    startCommand: npm start
+
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: MONGO_URI
+        sync: false
+      - key: JWT_SECRET
+        sync: false
+      - key: CLIENT_URL
+        sync: false

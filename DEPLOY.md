@@ -38,11 +38,26 @@ Redeploy after changing env vars so the frontend build picks them up.
 
 Vercel does not run long-lived servers or WebSockets. Deploy the **server** to a Node-friendly host and point the frontend at it.
 
-### Options
+### Backend on Render (recommended, no card required)
 
-- **Railway** – [railway.app](https://railway.app): connect repo, set root to `server`, add `MONGO_URI` and `PORT` (or use default).
-- **Render** – [render.com](https://render.com): create a **Web Service**, root directory `server`, build `npm install`, start `npm start`.
-- **Fly.io** – [fly.io](https://fly.io): add a `Dockerfile` or use `fly launch` in the `server` folder.
+This repo includes a **`render.yaml`** Blueprint so you can deploy the API in a few steps.
+
+1. **Sign in:** Go to [render.com](https://render.com) and sign in with GitHub.
+2. **New Blueprint:** Click **Dashboard** → **New +** → **Blueprint**.
+3. **Connect repo:** Select **Developerdannyjames1/Alishba_project** (or your fork). Render will detect `render.yaml` in the root.
+4. **Set env vars:** In the Blueprint preview, open the **alishba-api** service and add:
+   - **MONGO_URI** – Your MongoDB Atlas connection string.
+   - **JWT_SECRET** – A long random string (e.g. from `openssl rand -base64 32`).
+   - **CLIENT_URL** – Your Vercel frontend URL, e.g. `https://your-app.vercel.app` (no trailing slash).
+5. **Create resources:** Click **Apply**. Render will create the web service and deploy from the `server/` directory.
+6. **Backend URL:** After deploy, the API will be at `https://alishba-api.onrender.com` (or the URL shown in the dashboard). Use this for **VITE_API_URL** and **VITE_SOCKET_URL** in Vercel.
+
+**Note:** On the free tier the service sleeps after ~15 minutes of no traffic; the first request after sleep may take 30–60 seconds (cold start).
+
+### Other options
+
+- **Railway** – [railway.app](https://railway.app): connect repo, set root to `server`, add `MONGO_URI` and `CLIENT_URL`.
+- **Fly.io** – [fly.io](https://fly.io): use the `server/Dockerfile` and `server/fly.toml`; requires adding payment info for new apps.
 
 ### Backend env vars (e.g. on Railway/Render)
 
